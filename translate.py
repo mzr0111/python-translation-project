@@ -95,6 +95,15 @@ def get_complement(sequence):
     >>> get_complement('AUGC')
     'UACG'
     """
+def get_complement(sequence):
+    complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}
+    complement_seq = [complement[base] for base in sequence]
+    return ''.join(complement_seq)
+
+dna_sequence = "ACGTAGCTAGCTAGC"
+print("Original DNA Sequence: ", dna_sequence)
+print("Complement DNA Sequence: ", get_complement(dna_sequence))
+
 
 def reverse_and_complement(sequence):
     """Get the reversed and complemented form of a `sequence` of nucleotides.
