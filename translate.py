@@ -70,7 +70,15 @@ def get_all_translations(rna_sequence, genetic_code):
         A list of strings; each string is an sequence of amino acids encoded by
         `rna_sequence`.
     """
-    pass
+    all_translations = []
+    for i in range(3):
+        translation = translate_sequence(rna_sequence[i:], genetic_code)
+        if translation:
+            all_translations.append(translation)
+    return all_translations
+
+
+
 
 def get_reverse(sequence):
     return sequence[::-1]
@@ -156,7 +164,12 @@ def get_longest_peptide(rna_sequence, genetic_code):
         A string of the longest sequence of amino acids encoded by
         `rna_sequence`.
     """
-    pass
+    translations = get_all_translations(rna_sequence, genetic_code)
+    longest_peptide = ''
+    for translation in translations:
+        if len(translation) > len(longest_peptide):
+            longest_peptide = translation
+    return longest_peptide
 
 
 if __name__ == '__main__':
