@@ -74,9 +74,10 @@ def get_all_translations(rna_sequence, genetic_code):
     """
     all_translations = []
     for i in range(3):
-        translation = translate_sequence(rna_sequence[i:], genetic_code)
-        if translation:
-            all_translations.append(translation)
+        if rna_sequence[i:i+3] == 'AUG':
+            translation = translate_sequence(rna_sequence[i:], genetic_code)
+            if translation:
+                all_translations.append(translation)
     return all_translations
 
     #Here you will need to only start translating once you find a start codon 'AUG', so you may need to add some if statements.
