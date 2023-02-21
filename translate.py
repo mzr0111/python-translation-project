@@ -30,7 +30,7 @@ def translate_sequence(rna_sequence, genetic_code):
     """
     translated_sequence = ''
     for i in range(0, len(rna_sequence), 3):
-        codon = rna_sequence[i:i+3]
+        codon = rna_sequence[i:i+3].upper()
         if codon in genetic_code:
             if genetic_code[codon] == '*':
                 break
