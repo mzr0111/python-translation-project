@@ -119,17 +119,20 @@ def get_complement(sequence):
     >>> get_complement('AUGC')
     'UACG'
     """
-    complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}
-    complement_seq = [complement[base] for base in sequence]
+    complement = {'A': 'U', 'C': 'G', 'G': 'C', 'U': 'A'}
+    # convert sequence to list
+    seq_list = list(sequence)
+    complement_seq = [complement[base] for base in seq_list]
     return ''.join(complement_seq)
+
+dna_sequence = "ACGUAGCUAGCUAGC"
+print("Original DNA Sequence: ", dna_sequence)
+print("Complement DNA Sequence: ", get_complement(dna_sequence))
 
     #If you run this it isn't passing the tests where there are sequences provided. 
     #For the complement you should have A:U and U:A rather than A:T and T:A
     #Finally, this is only printing the first base. Try converting your sequence into a list before using the dictionary on it. 
 
-dna_sequence = "ACGTAGCTAGCTAGC"
-print("Original DNA Sequence: ", dna_sequence)
-print("Complement DNA Sequence: ", get_complement(dna_sequence))
 
 #The three lines above need to be indented
 
