@@ -85,11 +85,12 @@ def get_all_translations(rna_sequence, genetic_code):
 
 
 def get_reverse(sequence):
+    sequence=sequence.upper()
     return sequence[::-1]
 
-dna = "AGCTAGCTAGCTAGCTAGCT"
-print("Original DNA sequence:", dna)
-print("Reverse DNA sequence:", get_reverse(dna)) 
+sequence = "AUGC"
+print("Original sequence:", sequence)
+print("Reverse sequence:", get_reverse(sequence))
 
    """Reverse orientation of `sequence`.
 
