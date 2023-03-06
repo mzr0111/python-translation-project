@@ -6,40 +6,33 @@ import re
 def vet_nucleotide_sequence(sequence):
     """
     Return None if `sequence` is a valid RNA or DNA sequence, else raise exception. 
-
     Parameters
     ----------
     sequence : str
         A string representing a DNA or RNA sequence (upper or lower-case)
-
     Returns
     -------
     None
         Return nothing (None) if sequence is valid, otherwise raise an
         exception.
-
     Examples
     --------
     >>> vet_nucleotide_sequence('ACGTACGT') == None
     True
-
     >>> vet_nucleotide_sequence('not a valid sequence')
     Traceback (most recent call last):
         ...
     Exception: Invalid sequence: 'not a valid sequence'
-
     Don't allow mixing of DNA and RNA!
     >>> vet_nucleotide_sequence('AUTGC')
     Traceback (most recent call last):
         ...
     Exception: Invalid sequence: 'AUTGC'
-
     Don't allow whitespace (or other characters) before, within, or after!
     >>> vet_nucleotide_sequence(' ACGT ACGT ')
     Traceback (most recent call last):
         ...
     Exception: Invalid sequence: ' ACGT ACGT '
-
     But, an empty string should be deemed valid
     >>> vet_nucleotide_sequence('') == None
     True
@@ -57,8 +50,8 @@ def vet_nucleotide_sequence(sequence):
     # any valid RNA and DNA sequence strings, respectively (and only strings of
     # RNA and DNA bases).
     # Read the docstring above for additional clues.
-    rna_pattern_str = r'[AUCG]$'
-    dna_pattern_str = r'[ATCG]$'
+    rna_pattern_str = r'^[AUCG]*$'
+    dna_pattern_str = r'^[ATCG]*$'
     ##########################################################################
 
     rna_pattern = re.compile(rna_pattern_str)
@@ -76,34 +69,28 @@ def vet_nucleotide_sequence(sequence):
 def vet_codon(codon):
     """
     Return None if `codon` is a valid RNA codon, else raise an exception. 
-
     Parameters
     ----------
     codon : str
         A string representing a codon (upper or lower-case)
-
     Returns
     -------
     None
         Return nothing (None) if codon is valid, otherwise raise an
         exception.
-
     Examples
     --------
     Valid codon
     >>> vet_codon('AUG') == None
     True
-
     lower-case is also vaild 
     >>> vet_codon('aug') == None
     True
-
     DNA is not valid
     >>> vet_codon('ATG')
     Traceback (most recent call last):
         ...
     Exception: Invalid codon: 'ATG'
-
     A codon must be exactly 3 RNA bases long
     >>> vet_codon('AUGG')
     Traceback (most recent call last):
@@ -135,12 +122,10 @@ def find_first_orf(sequence,
         stop_codons = ['UAA', 'UAG', 'UGA']):
     """
     Return the first open-reading frame in the DNA or RNA `sequence`.
-
     An open-reading frame (ORF) is the part of an RNA sequence that is
     translated into a peptide. It must begin with a start codon, followed by
     zero or more codons (triplets of nucleotides), and end with a stop codon.
     If there are no ORFs in the sequence, an empty string is returned.
-
     Parameters
     ----------
     sequence : str
@@ -151,28 +136,23 @@ def find_first_orf(sequence,
     stop_codons : list of strings
         All possible stop codons. Each codon must be a string of 3 RNA bases,
         upper or lower-case.
-
     Returns
     -------
     str
         An uppercase string of the first ORF found in the `sequence` that
         starts with any one of the `start_codons` and ends with any one of the
         `stop_codons`. If no ORF is found an empty string is returned.
-
     Examples
     --------
     When the whole RNA sequence is an ORF:
     >>> find_first_orf('AUGGUAUAA', ['AUG'], ['UAA'])
     'AUGGUAUAA'
-
     When the whole DNA sequence is an ORF:
     >>> find_first_orf('ATGGTATAA', ['AUG'], ['UAA'])
     'AUGGUAUAA'
-
     When there is no ORF:
     >>> find_first_orf('CUGGUAUAA', ['AUG'], ['UAA'])
     ''
-
     When there is are bases before and after ORF:
     >>> find_first_orf('CCAUGGUAUAACC', ['AUG'], ['UAA'])
     'AUGGUAUAA'
